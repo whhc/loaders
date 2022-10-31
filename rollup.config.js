@@ -1,28 +1,22 @@
-import { terser } from 'rollup-plugin-terser';
-import vue from 'rollup-plugin-vue';
-import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
+import vue from 'rollup-plugin-vue'
+import babel from '@rollup/plugin-babel'
+import { terser } from 'rollup-plugin-terser'
+import postcss from 'rollup-plugin-postcss'
+import externals from 'rollup-plugin-node-externals'
 
-export default {
-  input: 'src/main.js',
-  output: [
-    {
-      file: 'dist/library.esm.mjs',
-      format: 'esm',
-    },
-    {
-      format: 'cjs',
-      file: 'dist/library.js',
-    },
-  ],
+export default [{
+  input: 'src/index.js',
+  output: {
+    dir: 'dist/',
+    format: 'esm'
+  },
   plugins: [
-    PeerDepsExternalPlugin(),
-    vue(),
+    vue({ preprocessStyles: true }),
+    externals(),
     terser(),
-    postcss({
-      modules: true,
-      external: false,
-      minimize: true,
-    }),
-  ],
-};
+    postcss(),
+    babel({
+      exclude: ['node_modules/**']
+    })
+  ]
+}]

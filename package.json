@@ -1,26 +1,32 @@
 {
 	"name": "@whhc/loaders",
-	"version": "0.0.1",
-	"main": "dist/library.js",
-	"module": "dist/library.esm.mjs",
+	"version": "0.0.0-beta.1",
+	"author": "whhc",
+	"license": "MIT",
+	"description": "A vue3 loaders.",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
 	"type": "module",
-	"files": [
-		"dist/*"
-	],
 	"scripts": {
-		"build": "rollup -c"
+		"build": "rm -rf dist && rollup -c rollup.config.js",
+		"dev": "npx rollup -c rollup.config.js -w",
+		"start": "npm run dev"
 	},
+	"keywords": [],
 	"devDependencies": {
+		"@babel/core": "^7.19.6",
+		"@rollup/plugin-babel": "^6.0.2",
+		"@rollup/plugin-multi-entry": "^6.0.0",
 		"@vue/compiler-sfc": "^3.2.41",
 		"node-sass": "^7.0.3",
 		"rollup": "^3.2.3",
-		"rollup-plugin-peer-deps-external": "^2.2.4",
+		"rollup-plugin-node-externals": "^5.0.1",
 		"rollup-plugin-postcss": "^4.0.2",
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-vue": "^6.0.0",
 		"sass": "^1.55.0"
 	},
 	"peerDependencies": {
-		"vue": ">=3.2.41"
+		"vue": ">= 3.0.0"
 	}
 }
